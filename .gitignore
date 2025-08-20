@@ -74,5 +74,5 @@ logs/
 temp/
 tmp/
 
-# Search history (optional - uncomment if you don't want to track)
-# search_history.json
+# Search history (contains sensitive data)
+search_history.json
