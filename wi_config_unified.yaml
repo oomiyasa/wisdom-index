@@ -1,0 +1,316 @@
+# ============================================
+# Wisdom Index Unified Configuration
+# ============================================
+
+# -------- Output --------
+output:
+  csv_path: "harvest_output.csv"
+
+# -------- Global Filters --------
+require_business_context: true
+business_hits_required: 1
+require_imperative_or_rule: true
+min_desc_chars: 60
+max_desc_chars: 260
+
+# -------- Keyword Anchors (Tacit Signals) --------
+keywords:
+  # Tacit signalers
+  - workaround
+  - rule_of_thumb
+  - lesson_learned
+  - pro_tip
+  - checklist
+  - gotcha
+  - trick_i_learned
+  - protip
+  - secret_trick
+  - my_secret_trick
+  - my_secret_tip
+  - my_secret_hack
+  - my_secret_hack
+  
+
+# -------- Industry Modifiers --------
+industry_modifiers:
+  - SaaS
+  - Finance
+  - Consulting
+  - Manufacturing
+  - HR
+  - Transportation
+  - Telecommunications
+  - Healthcare
+  - Hospitality
+  - Retail
+  - Logistics
+  - Marketing
+  - IT
+  - Legal
+  - Education
+# -------- Focus (Optional) --------
+focus_industry: ""
+focus_function: ""
+focus_use_case: ""
+
+# ============================================
+# Source Toggles
+# ============================================
+sources:
+  stackexchange: false
+  github: false
+  medium: false
+  reddit: false
+  usenet: false
+  podcasts: false
+  youtube: true
+
+# ============================================
+# Medium Settings
+# ============================================
+medium:
+  tags:
+    - best_practice
+
+  harvest:
+    min_claps: 10
+    limit: 80
+    time_filter: "year"
+    throttle_sec: 0.5
+
+# ============================================
+# Reddit Settings
+# ============================================
+reddit:
+  subreddits:
+    - askreddit
+    - entrepreneur
+    - smallbusiness
+    - startup
+    - humanresources
+    - fatbusiness
+    - csuite
+
+  harvest:
+    search_strategy: "auto"
+    limit: 30
+    time_filter: "month"
+    sort: "top"
+    scan_comments: true
+    per_thread_comment_limit: 5
+    min_post_score: 5
+    min_comment_score: 5
+    throttle_sec: 0.7
+
+    # Filters for better signal ↓
+    comment_min_chars: 120
+    comment_max_chars: 1200
+    require_keyword_in_comment: true
+    comment_patterns:
+      - "^do\\b|^don’t\\b|^avoid\\b|^always\\b|^never\\b|^use\\b|^make sure\\b"
+      - "\\b(because|so that|reason|works when|avoid this)\\b"
+
+
+
+# ============================================
+# StackExchange Settings
+# ============================================
+stackexchange:
+  api_key: ""  # Optional
+  sites:
+    - workplace
+  harvest:
+    mode: "auto"                 # auto | api | html
+    answered_only: true
+    min_score: 2
+    limit_per_site: 20
+    time_filter: "year"
+    impose_throttling: true
+    throttle_sec: 3.0
+
+# ============================================
+# GitHub Settings
+# ============================================
+github:
+  repos:
+    - google/eng-practices
+    - microsoft/vscode
+    - facebook/react
+  harvest:
+    search_in: ["issues"]
+    states: ["open", "closed"]
+    label_includes: []
+    comment_scan: true
+    min_comment_len: 100
+    max_threads_per_repo: 20
+    throttle_sec: 3.0
+    search_terms:
+      - "postmortem"
+      - "lessons learned"
+      - "incident report"
+      - "what we learned"
+      - "key takeaways"
+      - "best practices"
+      - "pro tip"
+      - "gotcha"
+      - "workaround"
+      - "learned"
+      - "discovered"
+      - "found"
+      - "realized"
+      - "figured out"
+      - "worked"
+      - "failed"
+      - "succeeded"
+      - "mistake"
+      - "success"
+      - "failure"
+      - "pattern"
+      - "approach"
+      - "method"
+      - "technique"
+      - "strategy"
+
+# ============================================
+# Usenet Settings
+# ============================================
+usenet:
+  harvest:
+    groups:
+      - "comp.management"
+      - "biz.general"
+      - "misc.business"
+      - "comp.software-eng"
+      - "comp.programming"
+    search_keywords:
+      - "lesson learned"
+      - "best practice"
+      - "pro tip"
+      - "workaround"
+      - "gotcha"
+      - "trick"
+      - "pattern"
+      - "approach"
+      - "method"
+      - "technique"
+      - "strategy"
+      - "learned"
+      - "discovered"
+      - "found"
+      - "realized"
+      - "figured out"
+      - "worked"
+      - "failed"
+      - "succeeded"
+      - "mistake"
+      - "success"
+      - "failure"
+    max_posts_per_group: 30
+    max_retries: 3
+    retry_delay: 5.0
+    throttle_sec: 2.0
+
+# ============================================
+# Podcast Settings
+# ============================================
+podcasts:
+  harvest:
+    podcasts:
+      - name: "Masters of Scale"
+        rss_url: "https://feeds.megaphone.fm/mastersofscale"
+        transcript_urls: []
+      - name: "The Tim Ferriss Show"
+        rss_url: "https://rss.art19.com/tim-ferriss-show"
+        transcript_urls: []
+      - name: "How I Built This"
+        rss_url: "https://feeds.npr.org/510313/podcast.xml"
+        transcript_urls: []
+      - name: "StartUp Podcast"
+        rss_url: "https://feeds.gimletmedia.com/hearstartup"
+        transcript_urls: []
+      - name: "The Knowledge Project"
+        rss_url: "https://feeds.feedburner.com/TheKnowledgeProject"
+        transcript_urls: []
+    search_keywords:
+      - "lesson learned"
+      - "best practice"
+      - "pro tip"
+      - "workaround"
+      - "gotcha"
+      - "trick"
+      - "pattern"
+      - "approach"
+      - "method"
+      - "technique"
+      - "strategy"
+      - "learned"
+      - "discovered"
+      - "found"
+      - "realized"
+      - "figured out"
+      - "worked"
+      - "failed"
+      - "succeeded"
+      - "mistake"
+      - "success"
+      - "failure"
+    max_episodes_per_podcast: 15
+    throttle_sec: 3.0
+    episode_throttle_sec: 1.0
+    transcript_throttle_sec: 2.0
+
+# ============================================
+# YouTube Settings
+# ============================================
+youtube:
+  harvest:
+    search_terms:
+      - "tim ferriss interview"
+      - "masters of scale reid hoffman"
+      - "how i built this guy raz"
+      - "startup interview"
+      - "entrepreneur interview"
+      - "business lessons learned"
+    search_keywords:
+      - "lesson learned"
+      - "best practice"
+      - "pro tip"
+      - "workaround"
+      - "gotcha"
+      - "trick"
+      - "pattern"
+      - "approach"
+      - "method"
+      - "technique"
+      - "strategy"
+      - "learned"
+      - "discovered"
+      - "found"
+      - "realized"
+      - "figured out"
+      - "worked"
+      - "failed"
+      - "succeeded"
+      - "mistake"
+      - "success"
+      - "failure"
+      - "always"
+      - "never"
+      - "because"
+      - "since"
+      - "therefore"
+      - "avoid"
+      - "prevent"
+      - "ensure"
+      - "make sure"
+      - "remember to"
+      - "experience"
+      - "insight"
+      - "wisdom"
+      - "advice"
+      - "the key is"
+      - "the secret is"
+    max_results_per_search: 10
+    max_videos_total: 50
+    throttle_sec: 2.0
+    video_throttle_sec: 1.0
