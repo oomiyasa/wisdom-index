@@ -19,3 +19,9 @@ numpy>=1.21.0
 beautifulsoup4>=4.9.0  # HTML parsing
 lxml>=4.6.0  # XML parsing
 selenium>=4.0.0  # Web scraping (if needed)
+
+# Development dependencies
+pytest>=6.0.0  # Testing
+black>=21.0.0  # Code formatting
+flake8>=3.8.0  # Linting
+

@@ -9,7 +9,7 @@ from typing import List, Dict
 
 def is_high_quality_content(text: str) -> bool:
     """Check if content is likely to contain tacit knowledge"""
-    if not text or len(text) < 100:
+    if not text or len(text) < 50:
         return False
     
     text_lower = text.lower()
@@ -21,13 +21,15 @@ def is_high_quality_content(text: str) -> bool:
         "work life balance", "time management", "stress management",
         "be patient", "be persistent", "be confident", "be positive",
         "personal", "family", "relationship", "marriage", "dating",
-        "health", "exercise", "diet", "sleep", "hobby", "vacation"
+        "health", "exercise", "diet", "sleep", "hobby", "vacation",
+        "episode", "podcast", "show", "interview", "discussion", "conversation",
+        "timestamps", "sponsor", "advertisement", "subscribe", "follow"
     ]
     
     if any(phrase in text_lower for phrase in obvious_phrases):
         return False
     
-    # Look for promising indicators
+    # Look for promising indicators (expanded for podcast content)
     promising_indicators = [
         "i use", "i found", "i learned", "i discovered", "i figured out",
         "the key is", "the trick is", "the secret is", "the hack is",
@@ -35,14 +37,21 @@ def is_high_quality_content(text: str) -> bool:
         "i always", "i never", "i make sure", "i ensure", "i create",
         "i establish", "i set up", "i organize", "i structure", "i manage",
         "because", "reason", "works when", "avoid this", "instead of",
-        "rather than", "instead", "alternative", "workaround", "solution"
+        "rather than", "instead", "alternative", "workaround", "solution",
+        "experience", "lesson", "insight", "wisdom", "advice", "tip",
+        "strategy", "approach", "method", "technique", "pattern",
+        "learned", "discovered", "found", "realized", "figured out",
+        "worked", "failed", "succeeded", "mistake", "success", "failure",
+        "always", "never", "usually", "typically", "generally",
+        "years of", "decades of", "since", "therefore", "so that",
+        "in order to", "pro tip", "trick", "hack", "shortcut"
     ]
     
     # Count promising indicators
     indicator_count = sum(1 for indicator in promising_indicators if indicator in text_lower)
     
-    # Must have at least 2 promising indicators
-    return indicator_count >= 2
+    # Must have at least 1 promising indicator for podcast content
+    return indicator_count >= 1
 
 def filter_csv(input_file: str, output_file: str, max_rows: int = 200):
     """Filter CSV for high-quality content"""

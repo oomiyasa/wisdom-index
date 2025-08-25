@@ -113,3 +113,4 @@ if __name__ == "__main__":
         args.output = str(data_dir / args.output)
     
     filter_devto_csv(args.input, args.output, args.max)
+

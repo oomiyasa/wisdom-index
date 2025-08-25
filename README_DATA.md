@@ -129,3 +129,4 @@ python3 transform_wisdom_index_openai.py
 python3 cleanup_data.py --organize
 ls data/wisdom/
 ```
+

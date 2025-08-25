@@ -60,10 +60,7 @@ sources:
   stackexchange: false
   github: false
   medium: false
-  reddit: false
-  usenet: false
-  podcasts: false
-  youtube: true
+  reddit: true
 
 # ============================================
 # Medium Settings
@@ -133,184 +130,22 @@ stackexchange:
 # ============================================
 github:
   repos:
-    - google/eng-practices
-    - microsoft/vscode
-    - facebook/react
+    - apache/airflow
+    - pandas-dev/pandas
+    - kubernetes/kubernetes
+    - grafana/grafana
+    - hashicorp/terraform
+    - microsoft/azure-docs
   harvest:
-    search_in: ["issues"]
+    search_in: ["issues", "discussions", "pulls"]
     states: ["open", "closed"]
-    label_includes: []
+    label_includes:
+      - postmortem
+      - retrospective
+      - incident
+      - regression
+      - best-practice
     comment_scan: true
-    min_comment_len: 100
-    max_threads_per_repo: 20
-    throttle_sec: 3.0
-    search_terms:
-      - "postmortem"
-      - "lessons learned"
-      - "incident report"
-      - "what we learned"
-      - "key takeaways"
-      - "best practices"
-      - "pro tip"
-      - "gotcha"
-      - "workaround"
-      - "learned"
-      - "discovered"
-      - "found"
-      - "realized"
-      - "figured out"
-      - "worked"
-      - "failed"
-      - "succeeded"
-      - "mistake"
-      - "success"
-      - "failure"
-      - "pattern"
-      - "approach"
-      - "method"
-      - "technique"
-      - "strategy"
-
-# ============================================
-# Usenet Settings
-# ============================================
-usenet:
-  harvest:
-    groups:
-      - "comp.management"
-      - "biz.general"
-      - "misc.business"
-      - "comp.software-eng"
-      - "comp.programming"
-    search_keywords:
-      - "lesson learned"
-      - "best practice"
-      - "pro tip"
-      - "workaround"
-      - "gotcha"
-      - "trick"
-      - "pattern"
-      - "approach"
-      - "method"
-      - "technique"
-      - "strategy"
-      - "learned"
-      - "discovered"
-      - "found"
-      - "realized"
-      - "figured out"
-      - "worked"
-      - "failed"
-      - "succeeded"
-      - "mistake"
-      - "success"
-      - "failure"
-    max_posts_per_group: 30
-    max_retries: 3
-    retry_delay: 5.0
-    throttle_sec: 2.0
-
-# ============================================
-# Podcast Settings
-# ============================================
-podcasts:
-  harvest:
-    podcasts:
-      - name: "Masters of Scale"
-        rss_url: "https://feeds.megaphone.fm/mastersofscale"
-        transcript_urls: []
-      - name: "The Tim Ferriss Show"
-        rss_url: "https://rss.art19.com/tim-ferriss-show"
-        transcript_urls: []
-      - name: "How I Built This"
-        rss_url: "https://feeds.npr.org/510313/podcast.xml"
-        transcript_urls: []
-      - name: "StartUp Podcast"
-        rss_url: "https://feeds.gimletmedia.com/hearstartup"
-        transcript_urls: []
-      - name: "The Knowledge Project"
-        rss_url: "https://feeds.feedburner.com/TheKnowledgeProject"
-        transcript_urls: []
-    search_keywords:
-      - "lesson learned"
-      - "best practice"
-      - "pro tip"
-      - "workaround"
-      - "gotcha"
-      - "trick"
-      - "pattern"
-      - "approach"
-      - "method"
-      - "technique"
-      - "strategy"
-      - "learned"
-      - "discovered"
-      - "found"
-      - "realized"
-      - "figured out"
-      - "worked"
-      - "failed"
-      - "succeeded"
-      - "mistake"
-      - "success"
-      - "failure"
-    max_episodes_per_podcast: 15
-    throttle_sec: 3.0
-    episode_throttle_sec: 1.0
-    transcript_throttle_sec: 2.0
-
-# ============================================
-# YouTube Settings
-# ============================================
-youtube:
-  harvest:
-    search_terms:
-      - "tim ferriss interview"
-      - "masters of scale reid hoffman"
-      - "how i built this guy raz"
-      - "startup interview"
-      - "entrepreneur interview"
-      - "business lessons learned"
-    search_keywords:
-      - "lesson learned"
-      - "best practice"
-      - "pro tip"
-      - "workaround"
-      - "gotcha"
-      - "trick"
-      - "pattern"
-      - "approach"
-      - "method"
-      - "technique"
-      - "strategy"
-      - "learned"
-      - "discovered"
-      - "found"
-      - "realized"
-      - "figured out"
-      - "worked"
-      - "failed"
-      - "succeeded"
-      - "mistake"
-      - "success"
-      - "failure"
-      - "always"
-      - "never"
-      - "because"
-      - "since"
-      - "therefore"
-      - "avoid"
-      - "prevent"
-      - "ensure"
-      - "make sure"
-      - "remember to"
-      - "experience"
-      - "insight"
-      - "wisdom"
-      - "advice"
-      - "the key is"
-      - "the secret is"
-    max_results_per_search: 10
-    max_videos_total: 50
-    throttle_sec: 2.0
-    video_throttle_sec: 1.0
+    min_comment_len: 120
+    max_threads_per_repo: 120
+    throttle_sec: 1.0

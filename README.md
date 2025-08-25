@@ -1,215 +1,201 @@
-# Wisdom Index - Tacit Knowledge Harvester
+# 🔍 Business Wisdom Database
 
-A comprehensive system for harvesting tacit knowledge from various online platforms and transforming it into structured insights.
+A comprehensive database of actionable business insights extracted from multiple content sources including podcasts, GitHub discussions, Reddit, Stack Exchange, and more.
 
-## 🚀 Features
+## 📊 Database Overview
 
-- **Multi-Platform Harvesting**: Reddit, GitHub, StackExchange, Medium, YouTube, and more
-- **Intelligent Filtering**: Pre-filters content for high-quality tacit knowledge
-- **OpenAI Integration**: Transforms raw content into structured insights
-- **Scalable Architecture**: Configurable search parameters and rate limiting
-- **Data Organization**: Automatic file organization and search history tracking
+- **Total Insights**: 425+ business insights
+- **Data Sources**: 5 different platforms
+- **Average Transferability Score**: 3.89/5
+- **Average Actionability Rating**: 4.24/5
 
-## 📋 Prerequisites
+### Data Sources
 
-- Python 3.8+
-- Required API keys (see Setup section)
-- Internet connection for harvesting
+1. **Combined Wisdom Index** (58 insights) - Podcasts + YouTube
+2. **GitHub** (151 insights) - Technical discussions and best practices
+3. **Reddit** (150 insights) - Community discussions and advice
+4. **Stack Exchange** (62 insights) - Q&A platform insights
+5. **Medium** (4 insights) - Article-based insights
 
-## 🔧 Setup
+## 🚀 Quick Start
 
-### 1. Clone the Repository
-```bash
-git clone <your-repo-url>
-cd Wisdex
-```
-
-### 2. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Environment Variables
-Create a `.env` file in the project root with your API credentials:
+### Data Processing Workflow
 
 ```bash
-# Required for OpenAI transformation
-OPENAI_API_KEY=your_openai_api_key_here
+# Run the complete workflow
+python3 workflow.py --config wi_config_unified.yaml
 
-# Required for Reddit harvesting
-REDDIT_CLIENT_ID=your_reddit_client_id_here
-REDDIT_CLIENT_SECRET=your_reddit_client_secret_here
-REDDIT_USER_AGENT=your_reddit_user_agent_here
-
-# Required for GitHub harvesting
-GITHUB_TOKEN=your_github_token_here
-
-# Required for YouTube harvesting
-YOUTUBE_API_KEY=your_youtube_api_key_here
+# Or run individual steps
+python3 workflow.py --step harvest --config wi_config_unified.yaml
+python3 workflow.py --step filter --config wi_config_unified.yaml
+python3 workflow.py --step transform --config wi_config_unified.yaml
 ```
 
-### 4. Get API Keys
+## 🔧 Installation
 
-#### OpenAI API Key
-- Visit: https://platform.openai.com/api-keys
-- Create a new API key
-- Add to `.env` file
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd Wisdex
+   ```
 
-#### Reddit API Credentials
-- Visit: https://www.reddit.com/prefs/apps
-- Create a new app (script type)
-- Note the client ID and secret
-- Add to `.env` file
+2. **Set up virtual environment**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
 
-#### GitHub Token
-- Visit: https://github.com/settings/tokens
-- Generate new token (classic)
-- Select repo scope
-- Add to `.env` file
-
-#### YouTube Data API Key
-- Visit: https://console.cloud.google.com/apis/credentials
-- Create new project or select existing
-- Enable YouTube Data API v3
-- Create API credentials
-- Add to `.env` file
-
-## 🎯 Usage
-
-### Basic Harvesting
-```bash
-# Harvest from all enabled platforms
-python3 harvesternew.py --config wi_config_unified.yaml --out insights.csv
-
-# Harvest from specific platform
-python3 harvesternew.py --config wi_config_unified.yaml --out reddit_insights.csv
-```
-
-### Configuration
-Edit `wi_config_unified.yaml` to:
-- Enable/disable platforms
-- Configure search terms
-- Set rate limits
-- Adjust filtering parameters
-
-### Data Organization
-```bash
-# View search history
-python3 view_search_history.py
-
-# Organize data files
-python3 cleanup_data.py
-
-# Filter quality content
-python3 filter_quality.py
-```
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your API keys
+   ```
 
 ## 📁 Project Structure
 
 ```
 Wisdex/
-├── harvesternew.py          # Main harvester script
-├── transform_wisdom_index_openai.py  # OpenAI transformation
-├── filter_quality.py        # Content filtering
-├── view_search_history.py   # Search history management
-├── cleanup_data.py          # Data organization
-├── wi_config_unified.yaml   # Configuration file
-├── .env                     # Environment variables (not in git)
-├── .gitignore              # Git ignore rules
-├── data/                   # Output directory
-│   ├── raw/               # Raw harvested data
-│   ├── filtered/          # Pre-filtered data
-│   ├── wisdom/            # Final insights
-│   └── archive/           # Archived data
-└── README.md              # This file
+├── data/                          # Data files
+│   ├── combined_wisdom_index.csv  # Combined insights (podcasts + YouTube)
+│   ├── wisdom/
+│   │   └── github_wisdom_index.csv # GitHub insights
+│   ├── reddit_full_harvest.csv    # Reddit insights
+│   ├── stackexchange_final.csv    # Stack Exchange insights
+│   └── medium_final.csv           # Medium insights
+├── harvesters/                    # Modular harvester package
+│   ├── base_harvester.py         # Base harvester class
+│   ├── reddit_harvester.py       # Reddit harvester
+│   └── ...                       # Other platform harvesters
+├── harvester_main.py             # Main harvester (modular)
+├── workflow.py                   # Complete workflow runner
+├── transform_wisdom_index_openai.py # OpenAI processing script
+└── README.md                     # This file
 ```
 
-## 🔒 Security
+## 📈 Data Quality Metrics
 
-### Credential Protection
-- **Never commit `.env` files** - they're in `.gitignore`
-- **Use environment variables** for all API keys
-- **Rotate keys regularly** for security
-- **Limit API permissions** to minimum required
+### Transferability Score (1-5)
+- **5**: Highly transferable across industries
+- **4**: Transferable with minor modifications
+- **3**: Moderately transferable
+- **2**: Limited transferability
+- **1**: Very specific to context
 
-### Safe Practices
-- Keep API keys private
-- Monitor API usage and quotas
-- Use rate limiting to avoid abuse
-- Respect platform terms of service
+### Actionability Rating (1-5)
+- **5**: Immediately actionable
+- **4**: Actionable with minimal effort
+- **3**: Requires some planning
+- **2**: Requires significant effort
+- **1**: Conceptual/strategic only
 
-## 📊 Data Flow
+### Evidence Strength
+- **Observed**: Direct observation or experience
+- **Peer-validated**: Validated by multiple sources
+- **Anecdotal**: Single source or story
+- **Experimental**: Tested in controlled environment
 
-1. **Harvesting**: Raw content from platforms
-2. **Filtering**: Quality filtering for tacit knowledge
-3. **Transformation**: OpenAI processing into structured format
-4. **Organization**: Automatic file organization
-5. **Analysis**: Insights ready for analysis
+## 🎯 Content Categories
 
-## 🎛️ Configuration
+### Impact Areas
+- **Efficiency**: Process optimization, time-saving techniques
+- **Risk**: Risk management, error prevention
+- **Revenue**: Revenue generation, monetization strategies
+- **Retention**: Customer/user retention strategies
+- **Control**: Process control, quality management
 
-### Platform Settings
-Each platform has configurable parameters:
-- Search terms/keywords
-- Rate limits
-- Result limits
-- Filtering criteria
+### Insight Types
+- **workaround**: Practical solutions to problems
+- **rule-of-thumb**: General guidelines and principles
+- **pattern**: Recurring solutions and approaches
+- **best practice**: Industry-standard approaches
+- **warning**: Common pitfalls to avoid
+- **pro tip**: Advanced techniques and insights
 
-### Output Format
-Insights are structured with fields:
-- description, rationale, use_case
-- impact_area, transferability_score
-- actionability_rating, evidence_strength
-- type, tag, role, function, company, industry
-- date, source, link, notes
+### Application Tags
+- **Data Management**: Database, analytics, data processing
+- **Code Management**: Software development, coding practices
+- **Resource Management**: Resource allocation, optimization
+- **Project Management**: Planning, execution, delivery
+- **Communication**: Team communication, stakeholder management
 
-## 🚨 Troubleshooting
+## 🔄 Data Processing Pipeline
 
-### Common Issues
-- **API Quota Exceeded**: Wait for reset or reduce search scope
-- **Rate Limiting**: Increase throttle delays in config
-- **No Results**: Check search terms and filtering criteria
-- **Import Errors**: Ensure all dependencies are installed
+### 1. Content Harvesting
+- **Podcasts**: Manual curation of high-quality business content
+- **YouTube**: Manual selection of business wisdom videos
+- **GitHub**: Automated harvesting from issue discussions
+- **Reddit**: Community-driven content collection
+- **Stack Exchange**: Q&A platform insights extraction
 
-### Debug Mode
-Add `--debug` flag for verbose output:
-```bash
-python3 harvesternew.py --config wi_config_unified.yaml --debug
-```
+### 2. OpenAI Processing
+- **Quality Filtering**: Strict criteria for tacit knowledge
+- **Categorization**: Automatic tagging and classification
+- **Scoring**: Transferability and actionability assessment
+- **Validation**: Evidence strength evaluation
 
-## 📈 Scaling
+### 3. Manual Curation
+- **Review**: Human validation of AI-processed insights
+- **Enhancement**: Additional context and metadata
+- **Organization**: Structured categorization and tagging
 
-### For Production Use
-- Implement proper logging
-- Add monitoring and alerts
-- Use database storage
-- Implement caching
-- Add error recovery
+## 🛠️ Development
 
-### Performance Optimization
-- Parallel processing
-- Caching strategies
-- Database indexing
-- CDN for static assets
+### Adding New Data Sources
+
+1. **Create harvester script**
+   ```python
+   # Example: harvest_new_source.py
+   def harvest_content():
+       # Extract insights from new source
+       pass
+   ```
+
+2. **Process with OpenAI**
+   ```bash
+   python3 transform_wisdom_index_openai.py
+   ```
+
+### Customizing the Pipeline
+
+- **Modify harvesting logic** in platform-specific harvesters
+- **Adjust filtering criteria** in quality filters
+- **Update transformation prompts** in OpenAI processing
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create feature branch
-3. Make changes
-4. Test thoroughly
-5. Submit pull request
+### Adding Insights
+1. **Identify high-quality content** from business sources
+2. **Extract actionable insights** with clear descriptions
+3. **Categorize and tag** appropriately
+4. **Validate quality** against existing standards
 
-## 📄 License
+### Improving the Pipeline
+1. **Enhance harvesting algorithms** for better data collection
+2. **Add new filter options** for more precise quality control
+3. **Optimize performance** for larger datasets
+4. **Improve transformation prompts** for better insight extraction
 
-[Add your license here]
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 🙏 Acknowledgments
 
-- OpenAI for GPT-4 API
-- Platform APIs (Reddit, GitHub, YouTube, etc.)
-- Open source community
+- **OpenAI** for providing the processing capabilities
+- **Content creators** across all platforms for sharing their wisdom
+- **Open source community** for the tools and frameworks used
+
+## 📞 Support
+
+For questions, suggestions, or contributions:
+- **Issues**: Create an issue in the repository
+- **Discussions**: Use the discussions tab for general questions
+- **Email**: Contact the maintainers directly
 
 ---
 
-**⚠️ Important**: Never commit API keys or credentials to version control. Always use environment variables and keep `.env` files secure.
+**Last Updated**: January 2025
+**Version**: 1.0.0
+**Status**: Active Development
+

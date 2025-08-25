@@ -3,16 +3,25 @@ import json
 import os
 import openai
 import time
+import logging
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
 
-INPUT_FILE = "data/devto_quality_filtered.csv"
-OUTPUT_FILE = "data/new_platforms_wisdom_index.csv"
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+INPUT_FILE = "data/youtube_curated_insights.csv"
+OUTPUT_FILE = "data/youtube_wisdom_index.csv"
 MODEL = "gpt-4"
 RATE_LIMIT_DELAY = 1.5  # seconds between requests
 
+# Validate OpenAI API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 if not openai.api_key:
     raise RuntimeError("OPENAI_API_KEY environment variable not set. Please create a .env file with your OpenAI API key.")
@@ -118,6 +127,7 @@ def process_row(row):
             {"role": "system", "content": "You extract business-relevant tacit knowledge from real-world data."},
             {"role": "user", "content": build_prompt(row)}
         ]
+        
         response = openai.chat.completions.create(
             model=MODEL,
             temperature=0.3,
@@ -161,29 +171,61 @@ def process_row(row):
 
         return result
 
+    except openai.RateLimitError as e:
+        logger.warning(f"Rate limit exceeded: {e}")
+        time.sleep(60)  # Wait 1 minute before retrying
+        return None
+    except openai.APIError as e:
+        logger.error(f"OpenAI API error: {e}")
+        return None
+    except json.JSONDecodeError as e:
+        logger.warning(f"Invalid JSON response: {e}")
+        return None
+    except KeyError as e:
+        logger.warning(f"Missing key in response: {e}")
+        return None
     except Exception as e:
-        print(f"⚠️ Error processing row: {e}")
+        logger.error(f"Unexpected error processing row: {e}")
         return None
 
 def main():
-    with open(INPUT_FILE, newline='', encoding='utf-8') as infile, \
-         open(OUTPUT_FILE, "w", newline='', encoding='utf-8') as outfile:
+    try:
+        # Check if input file exists
+        if not os.path.exists(INPUT_FILE):
+            logger.error(f"Input file not found: {INPUT_FILE}")
+            return
+        
+        # Skip the first 11 rows that were already processed
+        SKIP_ROWS = 11
+        
+        with open(INPUT_FILE, newline='', encoding='utf-8') as infile, \
+             open(OUTPUT_FILE, "a", newline='', encoding='utf-8') as outfile:
 
-        reader = csv.DictReader(infile)
-        writer = csv.DictWriter(outfile, fieldnames=COLUMNS)
-        writer.writeheader()
+            reader = csv.DictReader(infile)
+            writer = csv.DictWriter(outfile, fieldnames=COLUMNS)
+            
+            # Skip the first SKIP_ROWS rows
+            for i in range(SKIP_ROWS):
+                next(reader, None)
 
-        for i, row in enumerate(reader, 1):
-            print(f"🔍 Row {i:03d}...", end=" ")
-            result = process_row(row)
-            if result:
-                writer.writerow(result)
-                print("✅ kept")
-            else:
-                print("❌ discarded")
-            time.sleep(RATE_LIMIT_DELAY)
+            for i, row in enumerate(reader, SKIP_ROWS + 1):
+                logger.info(f"Processing row {i:03d}...")
+                result = process_row(row)
+                if result:
+                    writer.writerow(result)
+                    logger.info(f"Row {i}: ✅ kept")
+                else:
+                    logger.info(f"Row {i}: ❌ discarded")
+                time.sleep(RATE_LIMIT_DELAY)
 
-    print(f"✅ Complete! Output written to {OUTPUT_FILE}")
+        logger.info(f"✅ Complete! Output written to {OUTPUT_FILE}")
+        
+    except FileNotFoundError as e:
+        logger.error(f"File not found: {e}")
+    except PermissionError as e:
+        logger.error(f"Permission denied: {e}")
+    except Exception as e:
+        logger.error(f"Unexpected error in main: {e}")
 
 if __name__ == "__main__":
     main()
