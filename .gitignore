@@ -76,3 +76,15 @@ tmp/
 
 # Search history (contains sensitive data)
 search_history.json
+
+# Debug and test files
+scripts/debug/
+scripts/test/
+
+# Large data files
+*.html
+my_insights.csv
+
+# Backup files
+*.backup
+.env.backup

@@ -4,6 +4,7 @@ import os
 import openai
 import time
 import logging
+import argparse
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -16,6 +17,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Default values (can be overridden by command line arguments)
 INPUT_FILE = "data/youtube_curated_insights.csv"
 OUTPUT_FILE = "data/youtube_wisdom_index.csv"
 MODEL = "gpt-4"
@@ -189,26 +191,42 @@ def process_row(row):
         return None
 
 def main():
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description="Transform content using OpenAI to extract tacit knowledge")
+    parser.add_argument("--input", default=INPUT_FILE, help="Input CSV file path")
+    parser.add_argument("--output", default=OUTPUT_FILE, help="Output CSV file path")
+    parser.add_argument("--skip-rows", type=int, default=0, help="Number of rows to skip")
+    
+    args = parser.parse_args()
+    
+    # Update file paths from arguments
+    input_file = args.input
+    output_file = args.output
+    skip_rows = args.skip_rows
+    
     try:
         # Check if input file exists
-        if not os.path.exists(INPUT_FILE):
-            logger.error(f"Input file not found: {INPUT_FILE}")
+        if not os.path.exists(input_file):
+            logger.error(f"Input file not found: {input_file}")
             return
         
-        # Skip the first 11 rows that were already processed
-        SKIP_ROWS = 11
+        # Ensure output directory exists
+        output_dir = os.path.dirname(output_file)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
         
-        with open(INPUT_FILE, newline='', encoding='utf-8') as infile, \
-             open(OUTPUT_FILE, "a", newline='', encoding='utf-8') as outfile:
+        with open(input_file, newline='', encoding='utf-8') as infile, \
+             open(output_file, "w", newline='', encoding='utf-8') as outfile:
 
             reader = csv.DictReader(infile)
             writer = csv.DictWriter(outfile, fieldnames=COLUMNS)
+            writer.writeheader()  # Write header
             
-            # Skip the first SKIP_ROWS rows
-            for i in range(SKIP_ROWS):
+            # Skip rows if specified
+            for i in range(skip_rows):
                 next(reader, None)
 
-            for i, row in enumerate(reader, SKIP_ROWS + 1):
+            for i, row in enumerate(reader, skip_rows + 1):
                 logger.info(f"Processing row {i:03d}...")
                 result = process_row(row)
                 if result:
@@ -218,7 +236,7 @@ def main():
                     logger.info(f"Row {i}: ❌ discarded")
                 time.sleep(RATE_LIMIT_DELAY)
 
-        logger.info(f"✅ Complete! Output written to {OUTPUT_FILE}")
+        logger.info(f"✅ Complete! Output written to {output_file}")
         
     except FileNotFoundError as e:
         logger.error(f"File not found: {e}")

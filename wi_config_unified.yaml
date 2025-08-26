@@ -15,39 +15,231 @@ max_desc_chars: 260
 
 # -------- Keyword Anchors (Tacit Signals) --------
 keywords:
-  # Tacit signalers
-  - workaround
-  - rule_of_thumb
-  - lesson_learned
+  # How-To / Process-Oriented
+  - how_we_solved
+  - how_i_handled
+  - how_to_deal
+  - how_i_approach
+  - how_i_think_about
+  - my_process_for
+  - my_approach_to
+  - i_always_start_by
+  - when_to_use
+  - when_not_to_use
+  - before_you_do
+  - troubleshooting_steps
+  - here_what_i_do
+  - my_workflow_for
+  - start_with_this
+  
+  # Tips, Tricks, and Rules of Thumb
   - pro_tip
-  - checklist
+  - hot_tip
+  - rule_of_thumb
+  - tip_and_trick
+  - cheat_code
+  - life_hack
+  - mental_shortcut
+  - quick_tip
+  - if_you_ever
+  - i_found_that
+  - always
+  - never
+  - you_should_know
+  - common_mistake
+  - quick_fix
+  - quick_win
+  - things_nobody_tells_you
+  - save_yourself_time_by
+  - this_one_weird_trick
+  
+  # Lessons & Experience-Based Insights
+  - lesson_learned
+  - what_i_learned
+  - wish_i_knew
+  - what_nobody_told_me
+  - looking_back
+  - i_realized_that
+  - in_hindsight
+  - mistakes_i_made
+  - biggest_takeaway
+  - what_went_wrong
+  - the_hard_way
+  - i_used_to_think
+  - common_pitfall
+  - if_i_could_do_it_again
+  - overlooked_detail
+  - counterintuitive_insight
+  - don_make_this_mistake
+  
+  # Playbooks, Practices, and Frameworks
+  - playbook
+  - practice_we_follow
+  - unofficial_protocol
+  - the_way_we_do_things
+  - internal_guide
+  - our_internal_process
+  - the_framework_i_use
+  - undocumented_process
+  - tribal_knowledge
+  - company_shorthand
+  - decision_matrix
+  - design_principle
+  - cultural_norm
+  - our_approach_to
+  - best_practice
+  - informal_rule
+  - backchannel_process
+  
+  # Failures, Escalations & Edge Cases
+  - postmortem
+  - what_broke
+  - root_cause
+  - edge_case
+  - incident_review
+  - it_failed_because
+  - this_didn_work
+  - crisis_mode
+  - what_we_missed
+  - false_assumption
+  - unexpected_result
+  - escalation_path
+  - rollback_strategy
+  - incident_response
+  - sla_workaround
+  - recovery_plan
+  
+  # Workarounds & Hacks
+  - workaround
+  - hack
+  - dirty_fix
+  - duct_tape_solution
+  - makeshift_method
+  - unofficial_fix
+  - temp_solution
+  - quick_patch
+  - kludge
+  - bandaid
+  - shortcut_we_use
+  - monkey_patch
+  - janky_but_works
+  
+  # Coordination, Collaboration & Tacit Team Logic
+  - handoff
+  - escalation
+  - triage_process
+  - who_owns_what
+  - team_agreement
+  - we_decided_to
+  - unspoken_rule
+  - we_coordinate_by
+  - who_we_loop_in
+  - how_we_align
+  - shadow_process
+  - informal_sign_off
+  - just_ask_culture
+  - knowledge_silos
+  - undocumented_but_expected
+  
+  # Warnings & Cautions
+  - watch_out_for
+  - heads_up
   - gotcha
-  - trick_i_learned
-  - protip
-  - secret_trick
-  - my_secret_trick
-  - my_secret_tip
-  - my_secret_hack
-  - my_secret_hack
+  - anti_pattern
+  - common_trap
+  - beware_of
+  - don_do_this
+  - red_flag
+  - cautionary_tale
+  - avoid_this_mistake
+  - if_you_see_this_stop
+  
+  # Tacit Resource Mentions
+  - buried_in_the_wiki
+  - shared_spreadsheet
+  - dashboard_we_trust
+  - old_email_thread
+  - tribal_spreadsheet
+  - slack_thread
+  - legacy_file
+  - internal_doc
+  - customer_call_notes
+  - workaround_doc
+  - engineering_notion
+  
+  # Tacit Culture Signals
+  - unspoken_rule
+  - everyone_knows_that
+  - it_just_how_we_do_it
+  - we_never
+  - we_always
+  - you_learn_it_by_doing
+  - gut_feel
+  - feels_right
+  - tribal_knowledge
+  - it_in_the_air
+  - not_written_down
+  - comes_with_experience
+  
+  # Documentation Gaps / Tacit Transfer Triggers
+  - not_in_the_docs
+  - undocumented
+  - nobody_writes_this_down
+  - passed_down_verbally
+  - can_google_this
+  - slack_is_the_only_place
+  - nobody_teaches_this
+  - just_shadow_someone
+  - figure_it_out_on_the_job
+  - trial_and_error
+  - you_only_learn_by_doing
+  
+  # Data Science/ML specific (keeping existing ones)
+  - data_tip
+  - science_tip
+  - machine_tip
+  - learning_tip
+  - analytics_tip
+  - model_tip
+  - algorithm_tip
+  - dataset_tip
+  - feature_tip
+  - training_tip
+  - prediction_tip
+  - analysis_tip
+  - statistics_tip
+  - python_tip
+  - r_tip
+  - sql_tip
+  - visualization_tip
+  - pipeline_tip
+  - deployment_tip
+  - production_tip
   
 
 # -------- Industry Modifiers --------
 industry_modifiers:
-  - SaaS
-  - Finance
-  - Consulting
-  - Manufacturing
-  - HR
-  - Transportation
-  - Telecommunications
-  - Healthcare
-  - Hospitality
-  - Retail
-  - Logistics
-  - Marketing
-  - IT
-  - Legal
-  - Education
+  # Data Science/ML specific
+  - Data
+  - Science
+  - Machine
+  - Learning
+  - Analytics
+  - Model
+  - Algorithm
+  - Dataset
+  - Feature
+  - Training
+  - Prediction
+  - Analysis
+  - Statistics
+  - Python
+  - R
+  - SQL
+  - Visualization
+  - Pipeline
+  - Deployment
+  - Production
 # -------- Focus (Optional) --------
 focus_industry: ""
 focus_function: ""
@@ -60,7 +252,8 @@ sources:
   stackexchange: false
   github: false
   medium: false
-  reddit: true
+  reddit: false
+  web: true
 
 # ============================================
 # Medium Settings
@@ -80,32 +273,93 @@ medium:
 # ============================================
 reddit:
   subreddits:
-    - askreddit
-    - entrepreneur
-    - smallbusiness
-    - startup
-    - humanresources
-    - fatbusiness
-    - csuite
+    # Data Science Communities
+    - datascience
+    - MachineLearning
+    - learnmachinelearning
+    - dataengineering
+    - analytics
 
   harvest:
+    # Multi-mode harvesting approach
+    modes:
+      - name: evergreen_keyword
+        type: search
+        queries: [
+          "pro tip", "lesson learned", "wish I knew", "workaround", 
+          "rule of thumb", "how we solved", "postmortem", "gotcha",
+          "trick I learned", "secret", "hack", "avoid this",
+          "best practice", "common mistake", "learned the hard way",
+          "work", "job", "career", "office", "boss", "colleague",
+          "workplace", "professional", "business", "management",
+          "what should", "how do you", "what's the best way",
+          "advice", "tip", "trick", "hack", "secret"
+        ]
+        time_filters: ["all"]
+        sort: relevance
+        posts_per_query_per_sub: 10  # Fast for askreddit
+        
+      - name: annual_top
+        type: listing
+        listing: top
+        time_filters: ["month"]  # Shorter time window for speed
+        posts_per_sub: 20  # Fast for askreddit
+        
+      - name: fresh_new
+        type: listing
+        listing: new
+        time_filters: ["week"]  # Very recent for speed
+        posts_per_sub: 10  # Fast for askreddit
+        
+      - name: debated
+        type: listing
+        listing: controversial
+        time_filters: ["month"]  # Shorter time window for speed
+        posts_per_sub: 5  # Fast for askreddit
+
+    # Enhanced comment harvesting (optimized for speed)
+    comments:
+      sort_primary: confidence
+      sort_secondary: new
+      top_level_limit: 10  # Reduced for speed
+      child_limit: 5  # Reduced for speed
+      keyword_boost: [
+        "because", "so that", "avoid", "instead", "if X then Y",
+        "step", "check", "verify", "diagnose", "triage",
+        "reason", "works when", "avoid this", "pro tip",
+        "trick", "hack", "workaround", "lesson learned"
+      ]
+      max_depth: 2
+
+    # Quality filters (relaxed for askreddit)
+    filters:
+      require_self_post: false
+      min_comments: 1  # Relaxed for askreddit
+      exclude_crossposts: true
+      allowed_flairs: []  # Allow all flairs for askreddit
+      min_post_score: 0  # Relaxed for askreddit
+      min_comment_score: 0  # Relaxed for askreddit
+
+    # Legacy settings (fallback)
     search_strategy: "auto"
-    limit: 30
-    time_filter: "month"
+    limit: 50
+    time_filter: "year"
     sort: "top"
     scan_comments: true
-    per_thread_comment_limit: 5
-    min_post_score: 5
-    min_comment_score: 5
-    throttle_sec: 0.7
+    per_thread_comment_limit: 15
+    min_post_score: 0
+    min_comment_score: 0
+    throttle_sec: 0.5  # Faster throttling
 
     # Filters for better signal ↓
-    comment_min_chars: 120
-    comment_max_chars: 1200
-    require_keyword_in_comment: true
+    comment_min_chars: 30
+    comment_max_chars: 2500
+    require_keyword_in_comment: false
     comment_patterns:
-      - "^do\\b|^don’t\\b|^avoid\\b|^always\\b|^never\\b|^use\\b|^make sure\\b"
-      - "\\b(because|so that|reason|works when|avoid this)\\b"
+      - "^do\\b|^don't\\b|^avoid\\b|^always\\b|^never\\b|^use\\b|^make sure\\b"
+      - "\\b(because|so that|reason|works when|avoid this|pro tip|tip|trick|workaround|lesson learned)\\b"
+      - "\\b(data|science|machine|learning|analytics|model|algorithm|dataset|feature|training)\\b"
+      - "\\b(prediction|analysis|statistics|python|r|sql|visualization|pipeline|deployment|production)\\b"
 
 
 
@@ -124,6 +378,29 @@ stackexchange:
     time_filter: "year"
     impose_throttling: true
     throttle_sec: 3.0
+
+# ============================================
+# Web Forum Settings
+# ============================================
+web:
+  sites:
+    - name: "Kaggle Discussions"
+      url: "https://www.kaggle.com"
+      forum_urls:
+        - "/discussions?sort=votes"
+        - "/discussions?sort=recent&group=general"
+        - "/discussions?sort=recent&group=competitions"
+      selectors:
+        thread: "div.sc-SpRCP.bIuDbW.km-listitem--medium"
+        title: "div.sc-fbQrwq.sc-gLgElZ.cecTRc.iRrSWi"
+        content: "div.sc-fbQrwq.sc-gLgElZ.cecTRc.iRrSWi, span.sc-gLaqbQ.sc-cZnrqW.hyNDZh.dJqMVp"
+        author: "a.sc-bbbBoY.hzCdJV"
+        date: "span.sc-gLaqbQ.hyNDZh"
+  harvest:
+    limit_per_forum: 30
+    throttle_sec: 3.0
+    min_content_length: 10
+    max_content_length: 2000
 
 # ============================================
 # GitHub Settings

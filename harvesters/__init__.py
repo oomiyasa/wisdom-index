@@ -11,6 +11,7 @@ from .stackexchange_harvester import StackExchangeHarvester
 from .medium_harvester import MediumHarvester
 from .youtube_harvester import YouTubeHarvester
 from .podcast_harvester import PodcastHarvester
+from .web_harvester import WebHarvester
 
 __all__ = [
     'BaseHarvester',
@@ -19,5 +20,6 @@ __all__ = [
     'StackExchangeHarvester',
     'MediumHarvester',
     'YouTubeHarvester',
-    'PodcastHarvester'
+    'PodcastHarvester',
+    'WebHarvester'
 ]

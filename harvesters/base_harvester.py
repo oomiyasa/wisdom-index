@@ -135,14 +135,31 @@ class BaseHarvester(ABC):
     
     def _contains_tacit_knowledge(self, text: str, keywords: List[str]) -> bool:
         """Check if text contains tacit knowledge indicators"""
-        if not text or not keywords:
+        if not text:
             return False
         
         text_lower = text.lower()
         
-        # Check for keywords
-        if not any(keyword.lower() in text_lower for keyword in keywords):
-            return False
+        # Check for keywords (if provided)
+        if keywords:
+            keyword_found = False
+            for keyword in keywords:
+                # Handle different keyword formats
+                keyword_variants = [
+                    keyword.lower(),
+                    keyword.lower().replace('_', ' '),
+                    keyword.lower().replace('_', ''),
+                    keyword.lower().replace('_', '-')
+                ]
+                for variant in keyword_variants:
+                    if variant in text_lower:
+                        keyword_found = True
+                        break
+                if keyword_found:
+                    break
+            
+            if keyword_found:
+                return True  # If we found a keyword match, return True immediately
         
         # Check for tacit knowledge patterns
         tacit_patterns = [
@@ -151,7 +168,11 @@ class BaseHarvester(ABC):
             r'\b(the key is|the secret is|the trick is)\b',
             r'\b(my approach|my method|my strategy)\b',
             r'\b(always|never|avoid|make sure)\b',
-            r'\b(because|so that|reason|works when)\b'
+            r'\b(because|so that|reason|works when)\b',
+            r'\b(wish i knew|should have|would have)\b',
+            r'\b(experience shows|in practice|actually works)\b',
+            r'\b(common mistake|typical problem|usual issue)\b',
+            r'\b(quick fix|easy solution|simple trick)\b'
         ]
         
         return any(re.search(pattern, text_lower) for pattern in tacit_patterns)
